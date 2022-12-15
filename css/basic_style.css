@@ -17,8 +17,8 @@ body {
 }
 
 header {
-	position: fixed;
-	top: 0px;
+	position: sticky;
+	/* top: 0px; */
 	width: 100%;
 	margin: 16px;
 	margin-bottom: 32px;
@@ -27,9 +27,15 @@ header {
 	justify-content: space-between;
 	align-items: center;
 }
+header a {
+	text-decoration: none;
+}
 h1.page-title {
 	font-weight: bold;
 	font-size: 20px;
+}
+header .fa-chevron-left {
+	font-size: 1.7rem;
 }
 
 footer {
@@ -45,11 +51,21 @@ footer {
 }
 
 footer > div {
-	padding: 16px;
-	color: white;
+	padding: 16px 0px;
 }
 footer > div:hover {
 	background-color: var(--sub-color);
+}
+footer a {
+	text-decoration: none;
+	padding: 16px;
+	color: white;
+}
+
+section.main {
+	width: 95%;
+	margin: 0px auto;
+	margin-bottom: 8px;
 }
 
 input[type="text"] {
@@ -78,4 +94,24 @@ input[type="text"]:hover {
 }
 .label {
 	color: var(--primary-color);
+}
+.section-label {
+	background-color: var(--sub-color);
+	color: white;
+	padding: 8px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	/* border-spacing: 5px; */
+}
+table thead {
+	color: var(--sub-color);
+}
+table tr {
+	border-bottom: solid 1px var(--section-color);
+}
+table td {
+	padding: 8px;
 }
