@@ -1,0 +1,45 @@
+:root {
+	--primary-color: #5fe15c;
+	--sub-color: #419b3f;
+	--income-color: #6b95ff;
+	--outcome-color: #ff794f;
+	--section-color: #aaaaaa;
+}
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Robot Serif";
+}
+body {
+	font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+	line-height: 1.7rem;
+	font-size: 16px;
+}
+
+input[type="text"] {
+	border: 1px solid var(--primary-color);
+}
+input[type="text"]:hover {
+	outline: 2px solid var(--sub-color);
+}
+
+.button-main {
+	background-color: var(--primary-color);
+	padding: 8px;
+	text-decoration: none;
+	color: #fff;
+	border-radius: 5px;
+}
+.button-main:hover {
+	background-color: var(--sub-color);
+}
+.button-delete {
+	background-color: var(--outcome-color);
+	padding: 8px;
+	text-decoration: none;
+	color: #fff;
+	border-radius: 5px;
+}
+.label {
+	color: var(--primary-color);
+}
