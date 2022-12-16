@@ -15,14 +15,14 @@ function footer()
       </a>
     </div>
     <div>
-      <a href='./../fixed/fixed_cost.php'>
-        FIXED
-      </a>
+      <a href='./../analysis/monthly_graph.php'>
+        ANALYSIS
+      </a>    
     </div>
     <div>
-      <a href='./../analysis/monthly_graph.php'>
-        GRAPH
-      </a>    
+      <a href='./../setting/fixed_cost.php'>
+        SETTING
+      </a>
     </div>
     <div>ACCOUNT</div>
   </footer>
