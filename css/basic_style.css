@@ -4,6 +4,7 @@
 	--income-color: #6b95ff;
 	--outcome-color: #ff794f;
 	--section-color: #aaaaaa;
+	--header-height: 48px;
 }
 * {
 	margin: 0px;
@@ -14,12 +15,14 @@ body {
 	font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 	line-height: 1.7rem;
 	font-size: 16px;
+	padding-bottom: 80px;
 }
 
 header {
 	position: sticky;
+	top: 0px;
 	width: 100%;
-	height: 64px;
+	height: var(--header-height);
 	/* margin-bottom: 32px; */
 
 	display: flex;
@@ -70,6 +73,8 @@ section.navigation-tab {
 	height: 40px;
 	background-color: var(--sub-color);
 	color: white;
+	position: sticky;
+	top: var(--header-height);
 }
 
 section.navigation-tab ul {
@@ -117,13 +122,14 @@ section.main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin: 16px;
 }
 input[type="text"] {
 	border: 1px solid var(--primary-color);
 	border-radius: 5px;
 	padding: 8px;
-	margin: 16px;
 	width: 100%;
+	font-size: 1rem;
 }
 input[type="text"]:hover {
 	outline: 2px solid var(--sub-color);
@@ -131,7 +137,8 @@ input[type="text"]:hover {
 
 .button-main {
 	background-color: var(--primary-color);
-	padding: 8px;
+	border: none;
+	padding: 8px 16px;
 	text-decoration: none;
 	color: #fff;
 	border-radius: 5px;
@@ -141,7 +148,7 @@ input[type="text"]:hover {
 }
 .button-delete {
 	background-color: var(--outcome-color);
-	padding: 8px;
+	padding: 8px 16px;
 	text-decoration: none;
 	color: #fff;
 	border-radius: 5px;

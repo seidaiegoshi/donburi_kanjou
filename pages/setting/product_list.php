@@ -12,7 +12,7 @@ $footer = footer();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>product list</title>
   <link rel="stylesheet" type="text/css" href="./../../css/basic_style.css">
-  <link rel="stylesheet" type="text/css" href="./../../css/product_list.css">
+  <link rel="stylesheet" type="text/css" href="./../../css/list.css">
   <script src="https://kit.fontawesome.com/66d795ff86.js" crossorigin="anonymous"></script>
 </head>
 
@@ -37,7 +37,7 @@ $footer = footer();
         </div>
       </li>
       <li>
-        <a href="">
+        <a href="./fixed_cost_list.php">
           <div>
             固定費
           </div>
