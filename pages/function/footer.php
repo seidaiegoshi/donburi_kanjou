@@ -20,7 +20,7 @@ function footer()
       </a>    
     </div>
     <div>
-      <a href='./../setting/fixed_cost.php'>
+      <a href='./../setting/product_list.php'>
         SETTING
       </a>
     </div>

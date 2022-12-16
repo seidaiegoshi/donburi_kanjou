@@ -1,6 +1,5 @@
 <?php
 include("./../function/footer.php");
-// include("./~/pages/function/footer.php");
 $footer = footer();
 ?>
 
