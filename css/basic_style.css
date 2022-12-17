@@ -148,6 +148,7 @@ input[type="text"]:hover {
 }
 .button-delete {
 	background-color: var(--outcome-color);
+	border: none;
 	padding: 8px 16px;
 	text-decoration: none;
 	color: #fff;
@@ -175,4 +176,14 @@ table tr {
 }
 table td {
 	padding: 8px;
+}
+
+.main_cost,
+.sub_cost,
+.selling_price {
+	font-size: 1erm;
+	font-family: "Open Sans", sans-serif;
+}
+.yen {
+	font-size: 0.6rem;
 }

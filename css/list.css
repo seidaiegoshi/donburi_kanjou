@@ -13,3 +13,7 @@
 .menu > div > div {
 	margin: 8px;
 }
+
+.hidden {
+	display: none;
+}
