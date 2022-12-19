@@ -32,16 +32,10 @@ foreach ($result as $key => $record) {
       <td class='sub_cost'>{$record["sub_cost"]}<span class='yen'>円</span></td>
       <td class='selling_price'>{$record["selling_price"]}<span class='yen'>円</span></td>
 
-      <td class='td_edit hidden'>
+      <td class='td_edit'>
         <form action='./product_edit.php' method='GET'>
         <input type='hidden' value='{$record["id"]}'>
         <button class='button-main'>編集</button>
-        </form>
-      </td>
-      <td class='td_delete hidden'>
-        <form action='./product_delete.php' method='GET'>
-        <input type='hidden' value='{$record["id"]}'>
-        <button class='button-delete'>削除</button>
         </form>
       </td>
     </tr>
@@ -66,9 +60,10 @@ foreach ($result as $key => $record) {
 
 <body>
   <header>
-    <div>
+    <div class="return">
       <a href="./../home/home.php">
         <i class="fa-solid fa-chevron-left"></i>
+        <span>HOME</span>
       </a>
     </div>
     <div>
@@ -103,18 +98,6 @@ foreach ($result as $key => $record) {
       <div>
         <div>
           <a href="./product_add.php" class="button-main">商品追加</a>
-        </div>
-      </div>
-      <div>
-        <div>
-          <button class="button-main" id="edit-button">
-            編集
-          </button>
-        </div>
-        <div>
-          <button class="button-delete" id="delete-button">
-            削除
-          </button>
         </div>
       </div>
     </div>

@@ -24,9 +24,9 @@ $footer = footer();
 
 <body>
   <header>
-    <div>
+    <div class="return">
       <a href="./product_list.php">
-        <i class="fa-solid fa-chevron-left"></i>
+        <i class="fa-solid fa-chevron-left"></i><span>HOME</span>
       </a>
     </div>
     <div>
@@ -37,7 +37,7 @@ $footer = footer();
   </header>
   <section class="navigation-tab">
     <ul>
-      <li class="selected">
+      <li>
         <a href="./product_list.php">
           <div>
             商品一覧

@@ -47,16 +47,10 @@ foreach ($result as $key => $record) {
     <tr>
       <td>{$record["fixed_cost_name"]}</td>
       <td class='cost'>{$record["cost"]}<span class='yen'>円</span></td>
-      <td class='td_edit hidden'>
+      <td class='td_edit'>
         <form action='./fixed_cost_edit.php' method='GET'>
         <input type='hidden' value='{$record["id"]}'>
         <button class='button-main'>編集</button>
-        </form>
-      </td>
-      <td class='td_delete hidden'>
-        <form action='./fixed_cost_delete.php' method='GET'>
-        <input type='hidden' value='{$record["id"]}'>
-        <button class='button-delete'>削除</button>
         </form>
       </td>
     </tr>
@@ -81,9 +75,9 @@ foreach ($result as $key => $record) {
 
 <body>
   <header>
-    <div>
+    <div class="return">
       <a href="./../home/home.php">
-        <i class="fa-solid fa-chevron-left"></i>
+        <i class="fa-solid fa-chevron-left"></i><span>HOME</span>
       </a>
     </div>
     <div>
@@ -125,18 +119,6 @@ foreach ($result as $key => $record) {
       <div>
         <div>
           <a href="./fixed_cost_add.php" class="button-main">固定費追加</a>
-        </div>
-      </div>
-      <div>
-        <div>
-          <button class="button-main" id="edit-button">
-            編集
-          </button>
-        </div>
-        <div>
-          <button class="button-delete" id="delete-button">
-            削除
-          </button>
         </div>
       </div>
     </div>

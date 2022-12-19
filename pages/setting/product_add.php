@@ -24,9 +24,9 @@ $footer = footer();
 
 <body>
   <header>
-    <div>
+    <div class="return">
       <a href="./product_list.php">
-        <i class="fa-solid fa-chevron-left"></i>
+        <i class="fa-solid fa-chevron-left"></i><span>HOME</span>
       </a>
     </div>
     <div>
@@ -43,7 +43,7 @@ $footer = footer();
         </div>
       </li>
       <li>
-        <a href="./fixed_cost_lsit.php">
+        <a href="./fixed_cost_list.php">
           <div>
             固定費
           </div>
