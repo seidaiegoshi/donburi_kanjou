@@ -34,7 +34,8 @@ form {
 }
 #main_cost,
 #sub_cost,
-#selling_price {
+#selling_price,
+#cost {
 	width: 5rem;
 	font-family: "Open Sans", sans-serif;
 }

@@ -17,3 +17,14 @@
 .hidden {
 	display: none;
 }
+
+.sum-cost {
+	color: var(--outcome-color);
+}
+
+.sum_fixed_cost {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 16px;
+}
