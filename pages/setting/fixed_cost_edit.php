@@ -3,23 +3,22 @@ include("./../function/footer.php");
 include('./../function/db.php');
 
 if (
-  !isset($_POST['product_id']) || $_POST['product_id'] === ''
+  !isset($_POST['cost_id']) || $_POST['cost_id'] === ''
 ) {
   echo json_encode(["error_msg" => "no input"]);
   exit();
 }
-
-$product_id = $_POST["product_id"];
+$cost_id = $_POST["cost_id"];
 $footer = footer();
 
 // データベースに接続
 $pdo = connect_to_db();
 
 //プロダクトIDのデータを参照
-$sql = 'SELECT * FROM products_table WHERE id = :product_id';
+$sql = 'SELECT * FROM fixed_cost_table WHERE id = :cost_id';
 
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':product_id', $product_id, PDO::PARAM_STR);
+$stmt->bindValue(':cost_id', $cost_id, PDO::PARAM_STR);
 
 try {
   $status = $stmt->execute();
@@ -52,8 +51,8 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 <body>
   <header>
     <div class="return">
-      <a href="./product_list.php">
-        <i class="fa-solid fa-chevron-left"></i><span>商品一覧</span>
+      <a href="./fixed_cost_list.php">
+        <i class="fa-solid fa-chevron-left"></i><span>固定費一覧</span>
       </a>
     </div>
     <div>
@@ -79,52 +78,30 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
     </ul>
   </section>
   <section class="main">
-    <form action="./product_edit_act.php" method="POST">
+    <form action="./fixed_cost_edit_act.php" method="POST">
       <div class="status">
-        <input type="hidden" name="product_id" value="<?= $result["id"] ?>">
-        <label for="product_name">
-          商品名
+        <input type="hidden" name="cost_id" value="<?= $result["id"] ?>">
+        <label for="fixed_cost_name">
+          固定費名
         </label>
         <div>
-          <p>商品の名前を入力</p>
-          <input id="product_name" type="text" name="product_name" value="<?= $result["product_name"] ?>">
+          <p>固定費の名前を入力</p>
+          <input id="fixed_cost_name" type="text" name="fixed_cost_name" value="<?= $result["fixed_cost_name"] ?>">
         </div>
       </div>
       <div class="status">
-        <label for="unit">単位</label>
+        <label for="cost">費用</label>
         <div>
-          <p>商品の販売単位を入力(例)箱、袋、枚、ケース</p>
-          <input id="unit" type="text" name="unit" value="<?= $result["unit"] ?>">
-        </div>
-      </div>
-      <div class="status">
-        <label for="main_cost">主原価</label>
-        <div>
-          <p>製造に必要な原料費</p>
-          <input id="main_cost" type="text" name="main_cost" value="<?= $result["main_cost"] ?>">円
-        </div>
-      </div>
-      <div class="status">
-        <label for="sub_cost">副原価</label>
-        <div>
-          <p>梱包や輸送など、製造以外でかかる費用の概算</p>
-          <input id="sub_cost" type="text" name="sub_cost" value="<?= $result["sub_cost"] ?>">円
-        </div>
-      </div>
-      <div class="status">
-        <label for="selling_price">売値</label>
-        <div>
-          <p>商品の販売価格</p>
-          <input id="selling_price" type="text" name="selling_price" value="<?= $result["selling_price"] ?>">円
+          <p>固定費の1ヶ月分の値段(費用)を入力</p>
+          <input id="cost" type="text" name="cost" value="<?= $result["cost"] ?>">円
         </div>
       </div>
       <button class="button-main">保存</button>
     </form>
     <div class="delete_link">
-      <a href="./product_delete_act.php?product_id=<?= $product_id ?>" class>削除</a>
+      <a href="./fixed_cost_delete_act.php?cost_id=<?= $cost_id ?>" class>削除</a>
     </div>
   </section>
-
 
   <?= $footer ?>
 </body>
