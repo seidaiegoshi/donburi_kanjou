@@ -13,6 +13,7 @@ $footer = footer("home");
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>home</title>
   <link rel="stylesheet" type="text/css" href="./../../css/basic_style.css">
+  <script src="https://kit.fontawesome.com/66d795ff86.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
