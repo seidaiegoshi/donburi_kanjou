@@ -14,6 +14,7 @@ $footer = footer();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>performance</title>
   <link rel="stylesheet" type="text/css" href="./../../css/basic_style.css">
+  <link rel="stylesheet" type="text/css" href="./../../css/sales.css">
   <script src="https://kit.fontawesome.com/66d795ff86.js" crossorigin="anonymous"></script>
 </head>
 
@@ -43,10 +44,8 @@ $footer = footer();
           <td>単位</td>
         </tr>
       </thead>
-      <form action="./quantity_add_act.php" method="POST">
-        <tbody>
-        </tbody>
-        <button class="button-main">販売数を登録</button>
+      <tbody>
+      </tbody>
       </form> <!-- php -->
     </table>
   </section>
