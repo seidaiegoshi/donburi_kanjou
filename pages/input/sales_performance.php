@@ -2,8 +2,6 @@
 include("./../function/footer.php");
 
 $footer = footer();
-// 商品名一覧を取得
-
 
 ?>
 
@@ -33,7 +31,10 @@ $footer = footer();
     </div>
   </header>
   <section class="main">
-    <h2 class="section-label">日付 </h2>
+    <div class="section-label">
+      <h2>日付</h2>
+      <input type="date" id="select_date">
+    </div>
     <table>
       <thead>
         <tr>
@@ -42,15 +43,22 @@ $footer = footer();
           <td>単位</td>
         </tr>
       </thead>
-      <tbody>
-        <!-- php -->
-      </tbody>
+      <form action="./quantity_add_act.php" method="POST">
+        <tbody>
+        </tbody>
+        <button class="button-main">販売数を登録</button>
+      </form> <!-- php -->
     </table>
+  </section>
+  <section class="bottom-button">
+    <div>
 
-
-
+    </div>
   </section>
   <?= $footer ?>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./../../js/sales_performance.js"></script>
 </body>
 
 </html>

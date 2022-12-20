@@ -129,7 +129,7 @@ input[type="text"] {
 	border: 1px solid var(--primary-color);
 	border-radius: 5px;
 	padding: 8px;
-	width: 100%;
+	width: 95%;
 	font-size: 1rem;
 }
 input[type="text"]:hover {
@@ -164,9 +164,15 @@ input[type="text"]:hover {
 	color: var(--primary-color);
 }
 .section-label {
-	background-color: var(--sub-color);
-	color: white;
-	padding: 8px;
+	color: var(--primary-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 32px;
+	margin-bottom: 16px;
+
+	/* background-color: var(--sub-color); */
+	/* padding: 8px; */
 }
 
 table {
