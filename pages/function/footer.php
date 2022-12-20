@@ -14,7 +14,7 @@ function footer($menu)
   }
   $htmlElement .= "
     <a href='./../home/home.php'>
-      HOME
+      <i class='fa-solid fa-house'></i>
     </a>
   </div>";
 
@@ -27,7 +27,7 @@ function footer($menu)
   }
   $htmlElement .= "
   <a href='./../input/sales_performance.php'>
-        INPUT
+        <i class='fa-solid fa-pen'></i>
       </a>
     </div>";
 
@@ -40,7 +40,7 @@ function footer($menu)
   }
   $htmlElement .= "
   <a href='./../analysis/monthly_graph.php'>
-        ANALYSIS
+        <i class='fa-solid fa-chart-line'></i>
       </a>    
     </div>";
 
@@ -53,12 +53,12 @@ function footer($menu)
   }
   $htmlElement .= "
   <a href='./../setting/product_list.php'>
-        SETTING
+        <i class='fa-solid fa-gear'></i>
       </a>
     </div>";
 
   $htmlElement .= "
-  <div>ACCOUNT</div>
+  <div><i class='fa-solid fa-user'></i></div>
   </footer>";
   return $htmlElement;
 }
