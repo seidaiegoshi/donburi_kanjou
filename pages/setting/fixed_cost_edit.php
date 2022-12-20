@@ -9,7 +9,7 @@ if (
   exit();
 }
 $cost_id = $_POST["cost_id"];
-$footer = footer();
+$footer = footer("setting");
 
 // データベースに接続
 $pdo = connect_to_db();

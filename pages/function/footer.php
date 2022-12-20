@@ -1,30 +1,64 @@
 <?php
 
-function footer()
+function footer($menu)
 {
-  return "
-  <footer>
-    <div>
-      <a href='./../home/home.php'>
-        HOME
-      </a>
-    </div>
-    <div>
-      <a href='./../input/sales_performance.php'>
+  $htmlElement = "";
+  $htmlElement .= "
+  <footer>";
+  if ($menu == "home") {
+    $htmlElement .= "
+    <div class='selected'>";
+  } else {
+    $htmlElement .= "
+    <div>";
+  }
+  $htmlElement .= "
+    <a href='./../home/home.php'>
+      HOME
+    </a>
+  </div>";
+
+  if ($menu == "input") {
+    $htmlElement .= "
+    <div class='selected'>";
+  } else {
+    $htmlElement .= "
+    <div>";
+  }
+  $htmlElement .= "
+  <a href='./../input/sales_performance.php'>
         INPUT
       </a>
-    </div>
-    <div>
-      <a href='./../analysis/monthly_graph.php'>
+    </div>";
+
+  if ($menu == "analysis") {
+    $htmlElement .= "
+    <div class='selected'>";
+  } else {
+    $htmlElement .= "
+    <div>";
+  }
+  $htmlElement .= "
+  <a href='./../analysis/monthly_graph.php'>
         ANALYSIS
       </a>    
-    </div>
-    <div>
-      <a href='./../setting/product_list.php'>
+    </div>";
+
+  if ($menu == "setting") {
+    $htmlElement .= "
+    <div class='selected'>";
+  } else {
+    $htmlElement .= "
+    <div>";
+  }
+  $htmlElement .= "
+  <a href='./../setting/product_list.php'>
         SETTING
       </a>
-    </div>
-    <div>ACCOUNT</div>
-  </footer>
-";
+    </div>";
+
+  $htmlElement .= "
+  <div>ACCOUNT</div>
+  </footer>";
+  return $htmlElement;
 }

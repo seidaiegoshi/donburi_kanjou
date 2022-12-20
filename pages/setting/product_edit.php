@@ -10,7 +10,7 @@ if (
 }
 
 $product_id = $_POST["product_id"];
-$footer = footer();
+$footer = footer("setting");
 
 // データベースに接続
 $pdo = connect_to_db();

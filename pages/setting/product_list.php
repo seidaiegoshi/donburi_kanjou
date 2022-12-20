@@ -2,7 +2,7 @@
 include("./../function/footer.php");
 include('./../function/db.php');
 
-$footer = footer();
+$footer = footer("setting");
 
 
 // データベースに接続

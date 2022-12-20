@@ -1,6 +1,6 @@
 <?php
 include("./../function/footer.php");
-$footer = footer();
+$footer = footer("setting");
 
 
 ?>

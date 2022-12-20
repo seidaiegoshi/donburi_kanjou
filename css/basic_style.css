@@ -52,7 +52,7 @@ footer {
 	bottom: 0px;
 
 	width: 100%;
-	background-color: var(--primary-color);
+	background-color: var(--sub-color);
 
 	display: flex;
 	justify-content: space-evenly;
@@ -109,7 +109,7 @@ section.navigation-tab li a {
 	text-decoration: none;
 	color: white;
 }
-section.navigation-tab .selected {
+.selected {
 	background-color: var(--primary-color);
 }
 
