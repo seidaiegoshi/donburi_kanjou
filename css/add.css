@@ -39,3 +39,15 @@ form {
 	width: 5rem;
 	font-family: "Open Sans", sans-serif;
 }
+
+.delete_link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 24px;
+}
+
+.delete_link a {
+	color: var(--outcome-color);
+	cursor: pointer;
+}

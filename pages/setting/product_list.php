@@ -33,8 +33,8 @@ foreach ($result as $key => $record) {
       <td class='selling_price'>{$record["selling_price"]}<span class='yen'>円</span></td>
 
       <td class='td_edit'>
-        <form action='./product_edit.php' method='GET'>
-        <input type='hidden' value='{$record["id"]}'>
+        <form action='./product_edit.php' method='POST'>
+        <input type='hidden' name='product_id' value='{$record["id"]}'>
         <button class='button-main'>編集</button>
         </form>
       </td>
