@@ -27,7 +27,7 @@ $sum_fixed_cost
   = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // 固定費一覧を取得
-$sql = 'SELECT * FROM fixed_cost_table WHERE company_id = :company_id';
+$sql = 'SELECT * FROM fixed_cost_table WHERE company_id = :company_id  AND deleted_at IS  NULL';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':company_id', 1, PDO::PARAM_STR);

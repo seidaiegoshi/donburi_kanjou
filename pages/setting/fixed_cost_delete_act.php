@@ -2,23 +2,23 @@
 include('./../function/db.php');
 
 if (
-  !isset($_GET['product_id']) || $_GET['product_id'] === ''
+  !isset($_GET['cost_id']) || $_GET['cost_id'] === ''
 ) {
   echo json_encode(["error_msg" => "no input"]);
   exit();
 }
 
-$product_id = $_GET["product_id"];
+$cost_id = $_GET["cost_id"];
 
 $pdo = connect_to_db();
 
-$sql = 'UPDATE products_table
-SET deleted_at = NOW()
-WHERE id = :product_id
-';
+$sql =
+  'UPDATE fixed_cost_table
+SET deleted_at=NOW()
+WHERE  id=:cost_id';
 
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':product_id', $product_id, PDO::PARAM_STR);
+$stmt->bindValue(':cost_id', $cost_id, PDO::PARAM_STR);
 
 try {
   $status = $stmt->execute();
@@ -27,5 +27,5 @@ try {
   exit();
 }
 
-header("Location:./product_list.php");
+header("Location:./fixed_cost_list.php");
 exit();

@@ -8,7 +8,7 @@ $footer = footer();
 // データベースに接続
 $pdo = connect_to_db();
 
-$sql = 'SELECT * FROM products_table WHERE company_id = :company_id';
+$sql = 'SELECT * FROM products_table WHERE company_id = :company_id AND deleted_at IS  NULL';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':company_id', 1, PDO::PARAM_STR);
