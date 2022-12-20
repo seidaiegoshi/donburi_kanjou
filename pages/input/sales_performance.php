@@ -20,9 +20,9 @@ $footer = footer();
 
 <body>
   <header>
-    <div>
+    <div class="return">
       <a href="./../home/home.php">
-        <i class="fa-solid fa-chevron-left"></i>
+        <i class="fa-solid fa-chevron-left"></i><span>HOME</span>
       </a>
     </div>
     <div>
