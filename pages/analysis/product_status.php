@@ -128,12 +128,15 @@ foreach ($result as $key => $record) {
 
     // グラフデータ作成
     const graphData = [
-      ['商品名', '粗利', "主原価", "副原価", {
-        role: 'annotation'
-      }],
+      ['商品名', '粗利',
+        {
+          role: 'annotation'
+        },
+        "変動費(主原価+副原価)",
+      ],
     ];
     resultData.forEach(el => {
-      graphData.push([el.product_name, el.gross_profit, el.main_cost, el.sub_cost, el.selling_price])
+      graphData.push([el.product_name, el.gross_profit, Math.floor(el.gross_profit_rate) + "%", el.main_cost + el.sub_cost])
     });
 
 
@@ -148,7 +151,7 @@ foreach ($result as $key => $record) {
 
       var options = {
         legend: {
-          // position: 'none',
+          position: 'top',
         },
         hAxis: {
           title: "販売価格(円)",
