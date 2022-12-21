@@ -38,11 +38,11 @@ $footer = footer("home");
       <h3>固定費と商品を登録</h3>
       <div>
         <p>はじめに、
-          <a href="">設定<i class='fa-solid fa-gear'></i></a>
+          <a href="./../setting/product_list.php">設定<i class='fa-solid fa-gear'></i></a>
           で
-          <a href="">固定費</a>
+          <a href="./../setting/fixed_cost_list.php">固定費</a>
           と
-          <a href="">販売している商品</a>
+          <a href="./../setting/product_list.php">販売している商品</a>
           を登録します。
         </p>
       </div>
@@ -61,7 +61,7 @@ $footer = footer("home");
       <h3>グラフを確認</h3>
       <div>
         <p>登録した情報をもとに、
-          <a href="">グラフを表示<i class='fa-solid fa-chart-line'></i></a>
+          <a href="./../analysis/monthly_graph.php">グラフを表示<i class='fa-solid fa-chart-line'></i></a>
           します。
         </p>
       </div>
