@@ -4,6 +4,48 @@ include('./../function/db.php');
 
 $footer = footer("setting");
 
+// データベースに接続
+$pdo = connect_to_db();
+
+// 固定費の合計金額を取得
+$sql = 'SELECT * FROM `products_table`
+INNER JOIN(
+    SELECT product_id, SUM(quantity)AS cumulative_quantity FROM sale_table
+    GROUP BY product_id
+) AS result ON products_table.id = result.product_id
+WHERE company_id = :company_id AND deleted_at IS  NULL
+ORDER BY created_at DESC';
+
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':company_id', 1, PDO::PARAM_STR);
+
+try {
+  $status = $stmt->execute();
+} catch (PDOException $e) {
+  echo json_encode(["sql error" => "{$e->getMessage()}"]);
+  exit();
+}
+
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$table_element = "";
+foreach ($result as $key => $record) {
+  $gross_profit_rate = number_format($record["gross_profit_rate"], 2);
+  $table_element .= "
+    <tr>
+      <td>{$record["product_name"]}</td>
+      <td class='main_cost'>{$record["main_cost"]}<span class='yen'>円</span></td>
+      <td class='sub_cost'>{$record["sub_cost"]}<span class='yen'>円</span></td>
+      <td class='selling_price'>{$record["selling_price"]}<span class='yen'>円</span></td>
+      
+      <td class='gross_profit'>{$record["gross_profit"]}<span class='yen'>円</span></td>
+      <td class='gross_profit_rate'>{$gross_profit_rate}<span class='yen'>%</span></td>
+      <td class='cumulative_quantity'>{$record["cumulative_quantity"]}<span class='yen'>{$record["unit"]}</span></td>
+
+      
+    </tr>
+  ";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +98,24 @@ $footer = footer("setting");
       </li>
     </ul>
   </section>
-
+  <section class="main">
+    <table>
+      <thead>
+        <tr>
+          <td>商品名</td>
+          <td>主原価</td>
+          <td>副原価</td>
+          <td>売値</td>
+          <td>粗利</td>
+          <td>粗利率</td>
+          <td>累計販売数</td>
+        </tr>
+      </thead>
+      <tbody>
+        <?= $table_element ?>
+      </tbody>
+    </table>
+  </section>
   <?= $footer ?>
 
 

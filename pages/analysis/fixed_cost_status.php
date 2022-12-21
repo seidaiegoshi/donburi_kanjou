@@ -4,6 +4,37 @@ include('./../function/db.php');
 
 $footer = footer("setting");
 
+
+$pdo = connect_to_db();
+
+// 固定費一覧を取得
+$sql = 'SELECT * FROM fixed_cost_table WHERE company_id = :company_id  AND deleted_at IS  NULL ORDER BY cost DESC';
+
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':company_id', 1, PDO::PARAM_STR);
+
+
+try {
+  $status = $stmt->execute();
+} catch (PDOException $e) {
+  echo json_encode(["sql error" => "{$e->getMessage()}"]);
+  exit();
+}
+
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$fixed_cost_result = json_encode($result);
+
+$table_element = "";
+foreach ($result as $key => $record) {
+  $table_element .= "
+    <tr>
+      <td>{$record["fixed_cost_name"]}</td>
+      <td class='cost'>{$record["cost"]}<span class='yen'>円</span></td>
+    </tr>
+  ";
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -57,10 +88,59 @@ $footer = footer("setting");
     </ul>
   </section>
 
+  <section class="main">
+    <div id="piechart" style="width: 100%; height: 500px;"></div>
 
+    <table>
+      <thead>
+        <tr>
+          <td>固定費</td>
+          <td>毎月の費用</td>
+        </tr>
+      </thead>
+      <tbody>
+        <?= $table_element ?>
+      </tbody>
+    </table>
+  </section>
 
   <?= $footer ?>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    // phpからデータ取得
+    const resultData = JSON.parse(`<?= $fixed_cost_result ?>`);
+    console.log(resultData);
 
+    // グラフデータ作成
+    const graphData = [
+      ['固定費名', '金額'],
+    ];
+    resultData.forEach(el => {
+      graphData.push([el.fixed_cost_name, el.cost])
+    });
+
+
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable(graphData);
+
+      var options = {
+        title: '固定費の割合',
+        legend: {
+          position: 'none',
+        },
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+      chart.draw(data, options);
+    }
+  </script>
 
 </body>
 

@@ -151,11 +151,6 @@ $month_result = json_encode($result);
         role: 'annotation'
       });
       data.addRows(graphData)
-      // data.addRows([
-      //   ['1', 1000, "", 400, ""],
-      //   ['15', 1000, "", 1120, ""],
-      //   ['30', 1000, "固定費", 1300, "利益"]
-      // ])
 
       var options = {
         hAxis: {
