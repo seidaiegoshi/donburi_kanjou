@@ -7,14 +7,14 @@ $footer = footer("setting");
 // データベースに接続
 $pdo = connect_to_db();
 
-// 固定費の合計金額を取得
+// 商品一覧の情報を取得
 $sql = 'SELECT * FROM `products_table`
 INNER JOIN(
     SELECT product_id, SUM(quantity)AS cumulative_quantity FROM sale_table
     GROUP BY product_id
 ) AS result ON products_table.id = result.product_id
 WHERE company_id = :company_id AND deleted_at IS  NULL
-ORDER BY created_at DESC';
+ORDER BY gross_profit_rate DESC';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':company_id', 1, PDO::PARAM_STR);
@@ -27,6 +27,7 @@ try {
 }
 
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$products_status_result = json_encode($result);
 $table_element = "";
 foreach ($result as $key => $record) {
   $gross_profit_rate = number_format($record["gross_profit_rate"], 2);
@@ -99,6 +100,7 @@ foreach ($result as $key => $record) {
     </ul>
   </section>
   <section class="main">
+    <div id="piechart" style="width: 100%; height: 500px;"></div>
     <table>
       <thead>
         <tr>
@@ -118,7 +120,50 @@ foreach ($result as $key => $record) {
   </section>
   <?= $footer ?>
 
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    // phpからデータ取得
+    const resultData = JSON.parse(`<?= $products_status_result ?>`);
+    console.log(resultData);
 
+    // グラフデータ作成
+    const graphData = [
+      ['商品名', '利益率'],
+    ];
+    resultData.forEach(el => {
+      graphData.push([el.product_name, el.gross_profit_rate])
+    });
+
+
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable(graphData);
+
+      var options = {
+        title: '粗利率',
+        legend: {
+          position: 'none',
+        },
+        hAxis: {
+          title: "粗利率",
+          minValue: 0,
+          maxValue: 100,
+        },
+        vAxis: {
+          title: "商品名",
+        },
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('piechart'));
+
+      chart.draw(data, options);
+    }
+  </script>
 </body>
 
 </html>
