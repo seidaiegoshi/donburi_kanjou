@@ -201,8 +201,9 @@ $month_result = json_encode($result);
 
       var options = {
         chartArea: {
-          left: 140,
-          right: 80,
+          left: 100,
+          right: 30,
+          top: 50,
         },
         hAxis: {
           title: "日付",
@@ -213,7 +214,6 @@ $month_result = json_encode($result);
         vAxis: {
           title: "金額",
         },
-        title: '損益分岐点を知る',
         titleTextStyle: {
           color: '#333', // タイトルの文字色を指定
           fontSize: 24 // タイトルのフォントサイズを指定

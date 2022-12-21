@@ -150,6 +150,11 @@ foreach ($result as $key => $record) {
       var data = google.visualization.arrayToDataTable(graphData);
 
       var options = {
+        chartArea: {
+          left: 110,
+          right: 20,
+          // top: 50,
+        },
         legend: {
           position: 'top',
         },
