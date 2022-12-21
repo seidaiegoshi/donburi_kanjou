@@ -1,0 +1,53 @@
+.status {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 8px;
+	/* margin-bottom: 16px; */
+	width: 100%;
+}
+
+.status label {
+	width: 6rem;
+}
+.status > div {
+	width: calc(90% - 6rem);
+}
+.status > div > p {
+	color: var(--section-color);
+}
+
+button {
+	margin-top: 16px;
+}
+
+form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+/* product */
+#unit {
+	width: 4rem;
+}
+#main_cost,
+#sub_cost,
+#selling_price,
+#cost {
+	width: 5rem;
+	font-family: "Open Sans", sans-serif;
+}
+
+.delete_link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 24px;
+}
+
+.delete_link a {
+	color: var(--outcome-color);
+	cursor: pointer;
+}

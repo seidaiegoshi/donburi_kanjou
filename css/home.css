@@ -1,0 +1,29 @@
+section.main h2 {
+	color: var(--primary-color);
+	margin-top: 48px;
+	margin-bottom: 16px;
+}
+
+section.main h3 {
+	color: #333;
+	margin-top: 32px;
+	margin-bottom: 8px;
+	margin-left: 8px;
+}
+section.main p {
+	margin-left: 16px;
+}
+section.main a {
+	text-decoration: none;
+	background-color: var(--primary-color);
+	padding: 8px;
+	border-radius: 5px;
+	color: white;
+}
+section.main a:hover {
+	background-color: var(--sub-color);
+}
+section.main i {
+	padding-left: 8px;
+	font-size: 1rem;
+}

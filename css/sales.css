@@ -1,0 +1,7 @@
+input[type="text"] {
+	border: none;
+	background-color: #eee;
+}
+input[type="text"]:focus {
+	background-color: white;
+}

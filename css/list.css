@@ -1,0 +1,45 @@
+.menu {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.menu > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.menu > div > div {
+	margin: 8px;
+}
+
+.hidden {
+	display: none;
+}
+
+.sum-cost {
+	color: var(--outcome-color);
+}
+
+.sum_fixed_cost {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 16px;
+}
+
+.sum_fixed_cost a {
+	text-decoration: none;
+	color: white;
+}
+
+.sum_fixed_cost a i {
+	font-size: 1.2rem;
+	background-color: var(--primary-color);
+	border-radius: 5px;
+	padding: 8px;
+}
+.sum_fixed_cost a i:hover {
+	background-color: var(--sub-color);
+}
