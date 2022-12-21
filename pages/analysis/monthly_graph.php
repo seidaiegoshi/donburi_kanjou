@@ -164,7 +164,11 @@ $month_result = json_encode($result);
         vAxis: {
           title: "金額",
         },
-        title: '○月の損益分岐点',
+        title: '損益分岐点を知る',
+        titleTextStyle: {
+          color: '#333', // タイトルの文字色を指定
+          fontSize: 24 // タイトルのフォントサイズを指定
+        },
         legend: {
           position: 'none',
         },
@@ -194,7 +198,6 @@ $month_result = json_encode($result);
             pointSize: 10,
             annotations: {
               textStyle: {
-
                 fontSize: 20,
                 color: '#038EC7',
               },
