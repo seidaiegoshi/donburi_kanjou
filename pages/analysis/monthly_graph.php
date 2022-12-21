@@ -115,20 +115,70 @@ $month_result = json_encode($result);
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     const sum_fixed_cost = Number("<?= $sum_fixed_cost ?>");
-
     const resultData = JSON.parse(`<?= $month_result ?>`);
-
     console.log(resultData);
+    // その月の最初と最後を取得しておく。
+    let thisDay = new Date(resultData[0].date);
+    console.log(thisDay);
+    thisDay.setDate(1)
+    const firstDay = thisDay.getFullYear() + "-" + (thisDay.getMonth() + 1) + "-01";
+    thisDay.setMonth(thisDay.getMonth() + 1);
+    thisDay.setDate(0)
+    const lastDay = thisDay.getFullYear() + "-" + (thisDay.getMonth() + 1) + "-" + thisDay.getDate();
+    // console.log(firstDay);
+    // console.log(lastDay);
+
+
+    function getJustDate(date) {
+      // 長い日付のときは、単に最後の日数だけ、1とか2とかきたら、01とか02とかで返す。
+      return ("0" + date).slice(-2);
+    }
+
     let total_profit = 0;
     const graphData = [];
-    resultData.forEach((el, idx, arr) => {
-      total_profit += Number(el.day_profit);
-      if (idx === arr.length - 1) {
-        graphData.push([el.date, sum_fixed_cost, "固定費", total_profit, "利益"])
+
+    let day = 1;
+    let index = 0;
+    while (day <= getJustDate(lastDay)) {
+      console.log(day, index);
+      if (getJustDate(resultData[index]?.date) == getJustDate(day)) {
+        // その日付にデータがあったら、データを登録する。
+        total_profit += Number(resultData[index].day_profit);
+        if (index === resultData.length) {
+          // 最後のデータだったら、データラベルを追加する。
+          graphData.push([getJustDate(day), sum_fixed_cost, "固定費", total_profit, "利益"])
+        } else {
+          graphData.push([getJustDate(day), sum_fixed_cost, "", total_profit, ""])
+        }
+        index++;
       } else {
-        graphData.push([el.date, sum_fixed_cost, "", total_profit, ""])
+        if (index >= resultData.length) {
+          // もうデータがなかったら、空のデータで埋める。
+          graphData.push([getJustDate(day), sum_fixed_cost, "", null, ""])
+        } else {
+          // データがまだありそうなら、累積粗利で埋める.これしないと、線がつながらない。
+          graphData.push([getJustDate(day), sum_fixed_cost, "", total_profit, ""])
+        }
       }
-    });
+      day++;
+    }
+
+    // resultData.forEach((el, idx, arr) => {
+    //   total_profit += Number(el.day_profit);
+    //   if (idx === arr.length - 1) {
+
+    //     if (el.date !== lastDay) {
+    //       // 最後のデータが最終日じゃない場合は、最終日を追加する。
+    //       graphData.push([getJustDate(lastDay), sum_fixed_cost, "", null, ""])
+    //     }
+
+    //   } else if (idx === 0 && el.date !== firstDay) {
+    //     // 初日が月の開始日じゃない場合は、開始日を追加する。
+    //     graphData.push([getJustDate(firstDay), sum_fixed_cost, "", 0, ""])
+    //   } else {
+    //     graphData.push([getJustDate(el.date), sum_fixed_cost, "", total_profit, ""])
+    //   }
+    // });
     console.log(graphData);
 
     google.charts.load('current', {
@@ -139,7 +189,7 @@ $month_result = json_encode($result);
     function drawChart() {
       // var data = google.visualization.arrayToDataTable(resultData);
       var data = new google.visualization.DataTable();
-      data.addColumn("string", "X");
+      data.addColumn("string", "日付");
       data.addColumn("number", "固定費");
       data.addColumn({
         type: 'string',
@@ -153,8 +203,15 @@ $month_result = json_encode($result);
       data.addRows(graphData)
 
       var options = {
+        chartArea: {
+          left: 140,
+          right: 80,
+        },
         hAxis: {
           title: "日付",
+          textStyle: {
+            fontSize: 10
+          },
         },
         vAxis: {
           title: "金額",
