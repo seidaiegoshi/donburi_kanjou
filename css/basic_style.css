@@ -31,6 +31,8 @@ header {
 	align-items: center;
 	background-color: var(--primary-color);
 	color: white;
+
+	z-index: 10;
 }
 header a {
 	text-decoration: none;
@@ -76,6 +78,7 @@ section.navigation-tab {
 	color: white;
 	position: sticky;
 	top: var(--header-height);
+	z-index: 10;
 }
 
 section.navigation-tab ul {
