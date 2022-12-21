@@ -29,16 +29,16 @@ $footer = footer("home");
   </header>
 
   <section class="main">
-    <h2>はじめに</h2>
+    <h2>割と正確などんぶり会計</h2>
     <div>
-      <p>ツールは月の利益目標を可視化するツールです。</p>
+      <p>このツールは損益分岐点や商品の粗利率などを可視化するツールです。</p>
     </div>
     <h2>使い方</h2>
     <div>
       <h3>固定費と商品を登録</h3>
       <div>
         <p>はじめに、
-          <a href="">SETTINGページ<i class='fa-solid fa-gear'></i></a>
+          <a href="">設定<i class='fa-solid fa-gear'></i></a>
           で
           <a href="">固定費</a>
           と
