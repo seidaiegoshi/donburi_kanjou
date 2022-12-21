@@ -2,7 +2,7 @@
 include("./../function/footer.php");
 include('./../function/db.php');
 
-$footer = footer("setting");
+$footer = footer("analysis");
 
 
 $pdo = connect_to_db();

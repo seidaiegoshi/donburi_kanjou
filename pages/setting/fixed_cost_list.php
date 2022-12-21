@@ -108,7 +108,7 @@ foreach ($result as $key => $record) {
       <p>
         <span>固定費の合計</span>
         <span class="sum-cost"><?= $sum_fixed_cost["sum_cost"] ?></span><span class="yen">円</span>
-        <span><a href="./../analysis/">グラフアイコン</a></span>
+        <span><a href="./../analysis/fixed_cost_status.php"><i class='fa-solid fa-chart-line'></i></a></span>
       </p>
     </div>
     <div class="search">

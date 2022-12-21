@@ -213,3 +213,7 @@ table td {
 	justify-content: center;
 	align-items: center;
 }
+
+i {
+	font-size: 2rem;
+}
