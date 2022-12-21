@@ -14,7 +14,7 @@ INNER JOIN(
     GROUP BY product_id
 ) AS result ON products_table.id = result.product_id
 WHERE company_id = :company_id AND deleted_at IS  NULL
-ORDER BY gross_profit_rate DESC';
+ORDER BY cumulative_quantity DESC';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':company_id', 1, PDO::PARAM_STR);
@@ -128,10 +128,12 @@ foreach ($result as $key => $record) {
 
     // グラフデータ作成
     const graphData = [
-      ['商品名', '利益率'],
+      ['商品名', '粗利', "主原価", "副原価", {
+        role: 'annotation'
+      }],
     ];
     resultData.forEach(el => {
-      graphData.push([el.product_name, el.gross_profit_rate])
+      graphData.push([el.product_name, el.gross_profit, el.main_cost, el.sub_cost, el.selling_price])
     });
 
 
@@ -145,18 +147,18 @@ foreach ($result as $key => $record) {
       var data = google.visualization.arrayToDataTable(graphData);
 
       var options = {
-        title: '粗利率',
         legend: {
-          position: 'none',
+          // position: 'none',
         },
         hAxis: {
-          title: "粗利率",
+          title: "販売価格(円)",
           minValue: 0,
           maxValue: 100,
         },
         vAxis: {
           title: "商品名",
         },
+        isStacked: true,
       };
 
       var chart = new google.visualization.BarChart(document.getElementById('piechart'));
