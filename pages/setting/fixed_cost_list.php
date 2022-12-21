@@ -154,7 +154,13 @@ foreach ($result as $key => $record) {
           response.data.forEach((record) => {
             htmlElement += `<tr>
             <td>${record.fixed_cost_name}</td>
-            <td class="main_cost">${record.cost}<span class='yen'>円</span></td>
+            <td class="cost">${record.cost}<span class='yen'>円</span></td>
+            <td class='td_edit'>
+              <form action='./fixed_cost_edit.php' method='POST'>
+              <input type='hidden' name='cost_id' value='${record.id}'>
+              <button class='button-main'>編集</button>
+              </form>
+            </td>
             <tr>`;
           });
           if (htmlElement !== "") {
@@ -168,40 +174,6 @@ foreach ($result as $key => $record) {
         .finally(function() {});
     });
   </script>
-  <script>
-    let edit_mode = false;
-    let delete_mode = false;
-    // 編集・削除ボタン表示
-    $("#edit-button").on("click", function() {
-      if (edit_mode) {
-        edit_mode = !edit_mode
-        delete_mode = false;
-        $(".td_edit").addClass("hidden");
-
-      } else {
-        edit_mode = !edit_mode
-        delete_mode = true;
-        $(".td_edit").removeClass("hidden");
-        $(".td_delete").addClass("hidden");
-      }
-
-    })
-    $("#delete-button").on("click", function() {
-      if (delete_mode) {
-        delete_mode = !delete_mode
-        edit_mode = false;
-        $(".td_delete").addClass("hidden");
-
-      } else {
-        delete_mode = !delete_mode
-        edit_mode = true;
-        $(".td_delete").removeClass("hidden");
-        $(".td_edit").addClass("hidden");
-      }
-
-    })
-  </script>
-
 </body>
 
 </html>

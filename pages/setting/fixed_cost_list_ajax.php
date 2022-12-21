@@ -6,7 +6,7 @@ include("./../function/db.php");
 
 $pdo = connect_to_db();
 
-$sql = 'SELECT * FROM fixed_cost_table WHERE fixed_cost_name LIKE :search_word';
+$sql = 'SELECT * FROM fixed_cost_table WHERE fixed_cost_name LIKE :search_word AND deleted_at IS  NULL';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':search_word', "%{$search_word}%", PDO::PARAM_STR);
