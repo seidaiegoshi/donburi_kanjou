@@ -263,10 +263,11 @@ $month_result = json_encode($result);
       chart.draw(data, options);
     }
 
+    // 初期は現在の年月をセット
+    const date = new Date()
+    $("#select_month").val(date.getFullYear() + "-" + (date.getMonth() + 1))
 
-
-
-    // 年月を変更したと
+    // 年月を変更したら
     $("#select_month").on("change", function(e) {
       let thisDay = new Date(e.target.value);
       thisDay.setDate(1)
