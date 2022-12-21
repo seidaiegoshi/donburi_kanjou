@@ -144,7 +144,7 @@ $month_result = json_encode($result);
       if (getJustDate(resultData[index]?.date) == getJustDate(day)) {
         // その日付にデータがあったら、データを登録する。
         total_profit += Number(resultData[index].day_profit);
-        if (index === resultData.length) {
+        if (index === resultData.length - 1) {
           // 最後のデータだったら、データラベルを追加する。
           graphData.push([getJustDate(day), sum_fixed_cost, "固定費", total_profit, "利益"])
         } else {
@@ -162,23 +162,6 @@ $month_result = json_encode($result);
       }
       day++;
     }
-
-    // resultData.forEach((el, idx, arr) => {
-    //   total_profit += Number(el.day_profit);
-    //   if (idx === arr.length - 1) {
-
-    //     if (el.date !== lastDay) {
-    //       // 最後のデータが最終日じゃない場合は、最終日を追加する。
-    //       graphData.push([getJustDate(lastDay), sum_fixed_cost, "", null, ""])
-    //     }
-
-    //   } else if (idx === 0 && el.date !== firstDay) {
-    //     // 初日が月の開始日じゃない場合は、開始日を追加する。
-    //     graphData.push([getJustDate(firstDay), sum_fixed_cost, "", 0, ""])
-    //   } else {
-    //     graphData.push([getJustDate(el.date), sum_fixed_cost, "", total_profit, ""])
-    //   }
-    // });
     console.log(graphData);
 
     google.charts.load('current', {
