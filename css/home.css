@@ -20,6 +20,9 @@ section.main a {
 	border-radius: 5px;
 	color: white;
 }
+section.main a:hover {
+	background-color: var(--sub-color);
+}
 section.main i {
 	padding-left: 8px;
 	font-size: 1rem;

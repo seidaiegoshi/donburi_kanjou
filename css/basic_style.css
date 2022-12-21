@@ -54,7 +54,7 @@ footer {
 	bottom: 0px;
 
 	width: 100%;
-	background-color: var(--sub-color);
+	background-color: #666;
 
 	display: flex;
 	justify-content: space-evenly;
@@ -63,19 +63,25 @@ footer {
 
 footer > div {
 	padding: 16px 0px;
+	width: 20%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 footer > div:hover {
 	background-color: var(--sub-color);
 }
 footer a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 	text-decoration: none;
-	padding: 16px;
 	color: white;
 }
 section.navigation-tab {
 	height: 40px;
-	background-color: var(--sub-color);
-	color: white;
+	color: var(--primary-color);
 	position: sticky;
 	top: var(--header-height);
 	z-index: 10;
@@ -110,10 +116,15 @@ section.navigation-tab li a {
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
+	color: var(--primary-color);
+	border-bottom: solid 3px var(--section-color);
+}
+section.navigation-tab li a:hover {
+	background-color: var(--sub-color);
 	color: white;
 }
 .selected {
-	background-color: var(--primary-color);
+	border-bottom: solid 3px var(--primary-color);
 }
 
 section.main {
@@ -184,7 +195,7 @@ table {
 	/* border-spacing: 5px; */
 }
 table thead {
-	color: var(--sub-color);
+	color: var(--primary-color);
 }
 table tr {
 	border-bottom: solid 1px var(--section-color);
@@ -215,5 +226,5 @@ table td {
 }
 
 i {
-	font-size: 2rem;
+	font-size: 1.5rem;
 }
