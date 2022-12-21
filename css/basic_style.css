@@ -108,6 +108,7 @@ section.navigation-tab li > div {
 	align-items: center;
 	width: 100%;
 	height: 100%;
+	background-color: white;
 }
 section.navigation-tab li a {
 	display: flex;
@@ -118,6 +119,7 @@ section.navigation-tab li a {
 	text-decoration: none;
 	color: var(--primary-color);
 	border-bottom: solid 3px var(--section-color);
+	background-color: white;
 }
 section.navigation-tab li a:hover {
 	background-color: var(--sub-color);
