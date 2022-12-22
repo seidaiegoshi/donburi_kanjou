@@ -12,6 +12,7 @@ section.main h3 {
 }
 section.main p {
 	margin-left: 16px;
+	line-height: 2rem;
 }
 section.main a {
 	text-decoration: none;

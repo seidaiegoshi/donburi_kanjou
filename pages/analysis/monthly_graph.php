@@ -105,6 +105,14 @@ $month_result = json_encode($result);
     </ul>
   </section>
   <section class="main">
+    <div class="section-label">
+      <h2>年月</h2>
+      <input type="month" id="select_month">
+
+    </div>
+    <div class="section-label">
+      <p id="message"></p>
+    </div>
     <div>
       <div id="curve_chart" style="width: 100%; height: 80vh"></div>
     </div>
@@ -113,61 +121,66 @@ $month_result = json_encode($result);
 
   <?= $footer ?>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script type="text/javascript">
     const sum_fixed_cost = Number("<?= $sum_fixed_cost ?>");
-    const resultData = JSON.parse(`<?= $month_result ?>`);
-    console.log(resultData);
-    // その月の最初と最後を取得しておく。
-    let thisDay = new Date(resultData[0].date);
-    console.log(thisDay);
-    thisDay.setDate(1)
-    const firstDay = thisDay.getFullYear() + "-" + (thisDay.getMonth() + 1) + "-01";
-    thisDay.setMonth(thisDay.getMonth() + 1);
-    thisDay.setDate(0)
-    const lastDay = thisDay.getFullYear() + "-" + (thisDay.getMonth() + 1) + "-" + thisDay.getDate();
-    // console.log(firstDay);
-    // console.log(lastDay);
-
 
     function getJustDate(date) {
       // 長い日付のときは、単に最後の日数だけ、1とか2とかきたら、01とか02とかで返す。
       return ("0" + date).slice(-2);
     }
 
-    let total_profit = 0;
-    const graphData = [];
+    function getGraphData(resultData) {
+      // その月の最初と最後を取得しておく。
+      // console.log(resultData);
+      let thisDay = new Date(resultData[0].date);
+      thisDay.setDate(1)
+      const firstDay = thisDay.getFullYear() + "-" + (thisDay.getMonth() + 1) + "-01";
+      thisDay.setMonth(thisDay.getMonth() + 1);
+      thisDay.setDate(0)
+      const lastDay = thisDay.getFullYear() + "-" + (thisDay.getMonth() + 1) + "-" + thisDay.getDate();
 
-    let day = 1;
-    let index = 0;
-    while (day <= getJustDate(lastDay)) {
-      console.log(day, index);
-      if (getJustDate(resultData[index]?.date) == getJustDate(day)) {
-        // その日付にデータがあったら、データを登録する。
-        total_profit += Number(resultData[index].day_profit);
-        if (index === resultData.length - 1) {
-          // 最後のデータだったら、データラベルを追加する。
-          graphData.push([getJustDate(day), sum_fixed_cost, "固定費", total_profit, "利益"])
+
+      let total_profit = 0;
+      const gData = [];
+
+      let day = 1;
+      let index = 0;
+      while (day <= getJustDate(lastDay)) {
+        if (getJustDate(resultData[index]?.date) == getJustDate(day)) {
+          // その日付にデータがあったら、データを登録する。
+          total_profit += Number(resultData[index].day_profit);
+          if (index === resultData.length - 1) {
+            // 最後のデータだったら、データラベルを追加する。
+            gData.push([getJustDate(day), sum_fixed_cost, "固定費", total_profit, "利益"])
+          } else {
+            gData.push([getJustDate(day), sum_fixed_cost, "", total_profit, ""])
+          }
+          index++;
         } else {
-          graphData.push([getJustDate(day), sum_fixed_cost, "", total_profit, ""])
+          if (index >= resultData.length) {
+            // もうデータがなかったら、空のデータで埋める。
+            gData.push([getJustDate(day), sum_fixed_cost, "", null, ""])
+          } else {
+            // データがまだありそうなら、累積粗利で埋める.これしないと、線がつながらない。
+            gData.push([getJustDate(day), sum_fixed_cost, "", total_profit, ""])
+          }
         }
-        index++;
-      } else {
-        if (index >= resultData.length) {
-          // もうデータがなかったら、空のデータで埋める。
-          graphData.push([getJustDate(day), sum_fixed_cost, "", null, ""])
-        } else {
-          // データがまだありそうなら、累積粗利で埋める.これしないと、線がつながらない。
-          graphData.push([getJustDate(day), sum_fixed_cost, "", total_profit, ""])
-        }
+        day++;
       }
-      day++;
+      // console.log(gData);
+      return gData
     }
-    console.log(graphData);
 
+    let graphData = getGraphData(JSON.parse(`<?= $month_result ?>`));
     google.charts.load('current', {
       'packages': ['corechart', 'line', "bar"]
     });
     google.charts.setOnLoadCallback(drawChart);
+
+
+    let chart;
 
     function drawChart() {
       // var data = google.visualization.arrayToDataTable(resultData);
@@ -183,12 +196,14 @@ $month_result = json_encode($result);
         type: 'string',
         role: 'annotation'
       });
+      console.log(graphData);
       data.addRows(graphData)
 
       var options = {
         chartArea: {
-          left: 140,
-          right: 80,
+          left: 100,
+          right: 30,
+          top: 50,
         },
         hAxis: {
           title: "日付",
@@ -199,7 +214,6 @@ $month_result = json_encode($result);
         vAxis: {
           title: "金額",
         },
-        title: '損益分岐点を知る',
         titleTextStyle: {
           color: '#333', // タイトルの文字色を指定
           fontSize: 24 // タイトルのフォントサイズを指定
@@ -243,11 +257,45 @@ $month_result = json_encode($result);
         },
 
       };
-
-      var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
+      if (chart == null) {
+        chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+      }
       chart.draw(data, options);
     }
+
+    // 初期は現在の年月をセット
+    const date = new Date()
+    $("#select_month").val(date.getFullYear() + "-" + (date.getMonth() + 1))
+
+    // 年月を変更したら
+    $("#select_month").on("change", function(e) {
+      let thisDay = new Date(e.target.value);
+      thisDay.setDate(1)
+      const firstDay = thisDay.getFullYear() + "-" + (thisDay.getMonth() + 1) + "-01";
+      thisDay.setMonth(thisDay.getMonth() + 1);
+      thisDay.setDate(0)
+      const lastDay = thisDay.getFullYear() + "-" + (thisDay.getMonth() + 1) + "-" + thisDay.getDate();
+      // console.log(e.target.value);
+      // console.log(firstDay);
+      // console.log(lastDay);
+
+      // データ取得
+      const url = "./monthly_graph_ajax.php";
+      axios
+        .get(`${url}?first_day=${firstDay}&last_day=${lastDay}`)
+        .then(function(response) {
+          // graphデータを準備
+          graphData = getGraphData(response.data);
+          if (chart !== null) {
+            drawChart();
+          }
+          $("#message").text("");
+        })
+        .catch(function(error) {
+          $("#message").text("選択した月はデータがありません。");
+        })
+        .finally(function() {});
+    })
   </script>
 
 </body>
